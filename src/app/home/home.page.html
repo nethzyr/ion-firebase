@@ -7,6 +7,16 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+  <div *ngFor="let item of items | async">
+    {{item.name}} - {{item.price}}
+  </div>
+
+  <form (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+  </form>
+  
+  <ion-button (click)="registerUser()">Register</ion-button>
 </ion-content>
