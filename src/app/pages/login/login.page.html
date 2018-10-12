@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8" offset="2">
+        <form [formGroup]="myForm" (ngSubmit)="loginSubmitHandler()" *ngIf="!isAuth">
+          <ion-item>
+            <ion-label position="floating" color="{{ myForm.controls['email'].errors && myForm.controls['email'].dirty ? 'danger' : 'dark' }}">Email</ion-label>
+            <ion-input formControlName="email" type="email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating" color="{{ myForm.controls['password'].errors && myForm.controls['password'].dirty ? 'danger' : 'dark' }}">Password</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+
+          <ion-button expand="full" [disabled]="myForm.invalid" type="submit">Login</ion-button>
+          <ion-button color="secondary" expand="full" [disabled]="myForm.invalid" (click)="registerSubmitHandler()">Register</ion-button>
+        </form>
+
+        <ion-button *ngIf="isAuth" color="danger" expand="full" (click)="onSignOut()">Logout</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
