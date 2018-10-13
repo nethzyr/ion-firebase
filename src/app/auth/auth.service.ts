@@ -25,6 +25,10 @@ export class AuthService {
     });
   }
 
+  get currentUserObservable(): any {
+    return this.afAuth.authState;
+  }
+
   isAuthenticated() {
     return this.isAuth$;
   }
@@ -34,20 +38,20 @@ export class AuthService {
   }
 
   registerUser(authData: AuthData) {
-    this.afAuth.auth.createUserWithEmailAndPassword(
+    return this.afAuth.auth.createUserWithEmailAndPassword(
       authData.email,
       authData.password
     );
   }
 
   login(authData: AuthData) {
-    this.afAuth.auth.signInWithEmailAndPassword(
+    return this.afAuth.auth.signInWithEmailAndPassword(
       authData.email,
       authData.password
     );
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    return this.afAuth.auth.signOut();
   }
 }

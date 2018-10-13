@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,15 +16,17 @@ export class LoginPage implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder
-  ) {
-  }
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+
+    this.isAuth = this.authService.isAuthGuard();
 
     this.authSubscription = this.authService
       .isAuthenticated()
@@ -33,13 +35,10 @@ export class LoginPage implements OnInit, OnDestroy {
       });
   }
 
-  onSignOut() {
-    this.authService.logout();
-  }
-
   async registerSubmitHandler() {
     try {
       await this.authService.registerUser(this.myForm.value);
+      this.router.navigate(['/home']);
     } catch (err) {
       console.log(err);
     }
@@ -48,6 +47,7 @@ export class LoginPage implements OnInit, OnDestroy {
   async loginSubmitHandler() {
     try {
       await this.authService.login(this.myForm.value);
+      this.router.navigate(['/home']);
     } catch (err) {
       console.log(err);
     }

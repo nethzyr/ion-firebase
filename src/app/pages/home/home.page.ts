@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +13,7 @@ export class HomePage implements OnInit {
   isAuth = false;
   authSubscription: Subscription;
 
-  constructor(
-    private authService: AuthService,
-    private db: AngularFirestore,
-    private fb: FormBuilder
-  ) {
+  constructor(private authService: AuthService, private db: AngularFirestore) {
     this.items = this.db.collection('prices').valueChanges();
   }
 
