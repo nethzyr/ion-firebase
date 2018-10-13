@@ -21,11 +21,6 @@
             <ion-col size="8" offset="2">
                 <form [formGroup]="myForm" (ngSubmit)="sendEmail()">
                     <ion-item>
-                        <ion-label position="floating">From</ion-label>
-                        <ion-input formControlName="fromEmail" type="email" required></ion-input>
-                    </ion-item>
-
-                    <ion-item>
                         <ion-label position="floating">To</ion-label>
                         <ion-input formControlName="toEmail" type="email" required></ion-input>
                     </ion-item>

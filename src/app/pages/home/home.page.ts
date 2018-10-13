@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,8 @@ export class HomePage implements OnInit {
     private authService: AuthService,
     private db: AngularFirestore,
     private http: HttpClient,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastController: ToastController
   ) {
     this.items = this.db.collection('prices').valueChanges();
     this.initMyForm();
@@ -30,7 +32,6 @@ export class HomePage implements OnInit {
 
   private initMyForm() {
     this.myForm = this.fb.group({
-      fromEmail: ['', [Validators.required, Validators.email]],
       toEmail: ['', [Validators.required, Validators.email]],
       subject: ['', [Validators.required]],
       body: ['', [Validators.required]]
@@ -48,6 +49,24 @@ export class HomePage implements OnInit {
   sendEmail() {
     this.http
       .post(this.endpoint, this.myForm.value)
-      .subscribe(res => this.initMyForm());
+      .toPromise()
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.presentToast();
+    this.initMyForm();
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Your email have been sent.',
+      position: 'top',
+      duration: 3000
+    });
+    toast.present();
   }
 }

@@ -17,7 +17,7 @@ var transporter = nodemailer.createTransport({
 exports.httpEmail = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     const mailOptions = {
-      from: req.body.fromEmail, // sender address
+      from: "marharepa142@gmail.com", // sender address
       to: req.body.toEmail, // list of receivers
       subject: req.body.subject, // Subject line
       html: req.body.body // plain text body
