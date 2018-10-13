@@ -56,4 +56,6 @@ export class LoginPage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.authSubscription.unsubscribe();
   }
+
+  // TODO error messages && email
 }
