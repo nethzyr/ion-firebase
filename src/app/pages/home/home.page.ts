@@ -69,4 +69,8 @@ export class HomePage implements OnInit {
     });
     toast.present();
   }
+
+  add() {
+    console.log();
+  }
 }

@@ -4,40 +4,67 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>
-            Ionic Blank
+            Home
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-grid>
-        <ion-row *ngFor="let item of items | async">
-            <ion-col size="8" offset="2">
-                {{ item.name }} - {{ item.price }}
+    <ion-grid no-padding>
+        <ion-row class="list-row" *ngFor="let item of items | async" justify-content-between align-items-center>
+            <ion-col size="2" sizeMd="1">
+                <ion-avatar>
+                    <img src="assets\img\termkep_30281.jpg" />
+                </ion-avatar>
             </ion-col>
-        </ion-row>
 
-        <ion-row>
-            <ion-col size="8" offset="2">
-                <form [formGroup]="myForm" (ngSubmit)="sendEmail()">
-                    <ion-item>
-                        <ion-label position="floating">To</ion-label>
-                        <ion-input formControlName="toEmail" type="email" required></ion-input>
-                    </ion-item>
+            <ion-col size="4" sizeMd="9">
+                <ion-label padding>
+                    <h2>{{ item.name }}</h2>
+                    <h3>{{ item.price }} Ft</h3>
+                </ion-label>
+            </ion-col>
 
-                    <ion-item>
-                        <ion-label position="floating">Subject</ion-label>
-                        <ion-input formControlName="subject" type="text" required></ion-input>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label position="floating">Body</ion-label>
-                        <ion-input formControlName="body" type="text" required></ion-input>
-                    </ion-item>
-
-                    <ion-button expand="full" [disabled]="myForm.invalid" type="submit">Send Email</ion-button>
-                </form>
+            <ion-col size="3" sizeSm="2" sizeMd="1">
+                <ion-item>
+                    <ion-label position="stacked">db</ion-label>
+                    <ion-input placeholder="0"></ion-input>
+                </ion-item>
             </ion-col>
         </ion-row>
     </ion-grid>
+
+
+    <ion-row justify-content-center>
+        <ion-col size="2" sizeMd="1">
+            <ion-button (click)="add()">
+                <i class="fas fa-plus"></i>
+            </ion-button>
+
+            <ion-button (click)="add()">
+                <i class="fas fa-minus"></i>
+            </ion-button>
+        </ion-col>
+
+        <ion-col size="8">
+            <form [formGroup]="myForm" (ngSubmit)="sendEmail()">
+                <ion-item>
+                    <ion-label position="floating">To</ion-label>
+                    <ion-input formControlName="toEmail" type="email" required></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Subject</ion-label>
+                    <ion-input formControlName="subject" type="text" required></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Body</ion-label>
+                    <ion-input formControlName="body" type="text" required></ion-input>
+                </ion-item>
+
+                <ion-button expand="full" [disabled]="myForm.invalid" type="submit">Send Email</ion-button>
+            </form>
+        </ion-col>
+    </ion-row>
 </ion-content>
