@@ -15,17 +15,32 @@
       <ion-col size="8" offset="2">
         <form *ngIf="!isAuth" [formGroup]="myForm" (ngSubmit)="loginSubmitHandler()">
           <ion-item>
-            <ion-label position="floating" color="{{ myForm.controls['email'].errors && myForm.controls['email'].dirty ? 'danger' : 'dark' }}">Email</ion-label>
-            <ion-input formControlName="email" type="email"></ion-input>
+            <ion-label position="floating"
+                       color="{{ myForm.controls['email'].errors && myForm.controls['email'].dirty ? 'danger' : 'dark' }}">
+              Email
+            </ion-label>
+            <ion-input formControlName="email" autofocus="true" inputmode="email" type="email"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating" color="{{ myForm.controls['password'].errors && myForm.controls['password'].dirty ? 'danger' : 'dark' }}">Password</ion-label>
-            <ion-input formControlName="password" type="password"></ion-input>
+            <ion-label position="floating"
+                       color="{{ myForm.controls['password'].errors && myForm.controls['password'].dirty ? 'danger' : 'dark' }}">
+              Password
+            </ion-label>
+            <ion-input formControlName="password" minlength="6" type="password" f></ion-input>
           </ion-item>
 
-          <ion-button expand="full" [disabled]="myForm.invalid" type="submit">Login</ion-button>
-          <ion-button color="secondary" expand="full" [disabled]="myForm.invalid" (click)="registerSubmitHandler()">Register</ion-button>
+          <ion-row>
+            <ion-col size="12" sizeMd="6">
+              <ion-button expand="full" [disabled]="myForm.invalid" type="submit">Login</ion-button>
+            </ion-col>
+
+            <ion-col size="12" sizeMd="6">
+              <ion-button color="secondary" expand="full" [disabled]="myForm.invalid"
+                          (click)="registerSubmitHandler()">Register
+              </ion-button>
+            </ion-col>
+          </ion-row>
         </form>
       </ion-col>
     </ion-row>
