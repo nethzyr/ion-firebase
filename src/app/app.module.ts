@@ -9,11 +9,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/auth.service';
+import { itemReducer } from './store/reducers/reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +27,10 @@ import { AuthService } from './auth/auth.service';
     AppRoutingModule,
     BrowserModule,
     IonicModule.forRoot(),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({ item: itemReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 5,
+    }),
   ],
   providers: [
     AuthService,
