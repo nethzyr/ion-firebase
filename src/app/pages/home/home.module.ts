@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
 
@@ -12,16 +12,17 @@ import { HomePage } from './home.page';
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     IonicModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',
-        component: HomePage
-      }
+        component: HomePage,
+      },
     ]),
-    ReactiveFormsModule,
-    HttpClientModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
 })
-export class HomePageModule {}
+export class HomePageModule {
+}

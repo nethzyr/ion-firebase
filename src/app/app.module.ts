@@ -19,16 +19,24 @@ import { AuthService } from './auth/auth.service';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AppRoutingModule,
     BrowserModule,
     IonicModule.forRoot(),
     StoreModule.forRoot({}),
   ],
   providers: [
-    StatusBar,
+    AuthService,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthService
+    StatusBar,
+    {
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

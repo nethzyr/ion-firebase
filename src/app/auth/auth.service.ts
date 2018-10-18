@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AuthData } from './auth-data.model';
+import { Router } from '@angular/router';
+
 import { Subject } from 'rxjs';
 
+import { AuthData } from './auth-data.model';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private isAuth$ = new Subject<boolean>();
@@ -40,14 +42,14 @@ export class AuthService {
   registerUser(authData: AuthData) {
     return this.afAuth.auth.createUserWithEmailAndPassword(
       authData.email,
-      authData.password
+      authData.password,
     );
   }
 
   login(authData: AuthData) {
     return this.afAuth.auth.signInWithEmailAndPassword(
       authData.email,
-      authData.password
+      authData.password,
     );
   }
 
