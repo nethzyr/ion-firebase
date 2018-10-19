@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/auth.service';
-import { itemReducer } from './store/reducers/reducers';
+import { itemReducer } from './items/store/reducers/reducer';
 
 @NgModule({
   declarations: [AppComponent],
