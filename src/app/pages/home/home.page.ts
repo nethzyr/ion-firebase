@@ -4,9 +4,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ToastController } from '@ionic/angular';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 
 import { AuthService } from '../../auth/auth.service';
+import { LoadItems } from '../../items/store/actions';
 
 @Component({
   selector: 'app-home',
@@ -27,11 +29,14 @@ export class HomePage implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private toastController: ToastController,
+    private store: Store<any>
   ) {
-    this.items = this.db.collection('prices')
-      .valueChanges();
+    this.items = this.db.collection('prices').valueChanges();
 
     this.initMyForm();
+
+    this.store.select('ItemsState').subscribe(res => console.log(res));
+    this.store.dispatch(new LoadItems());
   }
 
   async presentToast() {

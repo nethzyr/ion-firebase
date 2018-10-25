@@ -1,25 +1,33 @@
-import { Action } from '@ngrx/store';
 import { Item } from '../../models/item.model';
-import * as fromAction from '../actions/index';
+import * as fromItems from '../actions/index';
 
-export interface ItemState {
-  entities: { [id: number]: Item };
-  loaded: boolean;
-  loading: boolean;
+export interface ItemsState {
+  entities: Array<Item>;
 }
 
-export const initialState: ItemState = {
-  entities: {},
-  loaded: false,
-  loading: false,
+export const initialState: ItemsState = {
+  entities: [],
 };
 
-export function reducer(state = initialState, action: Action) {
+export function reducer(
+  state: ItemsState = initialState,
+  action: fromItems.ItemAction
+) {
   switch (action.type) {
-    case fromAction.LOAD_ITEMS: {
+    case fromItems.LOAD_ITEMS: {
       return {
         ...state,
-        loading: true,
+      };
+    }
+    case fromItems.LOAD_ITEMS_SUCCESS: {
+      return {
+        ...state,
+        entities: [...state.entities, action.payload],
+      };
+    }
+    case fromItems.LOAD_ITEMS_FAIL: {
+      return {
+        ...state,
       };
     }
     default:

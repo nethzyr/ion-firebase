@@ -4,18 +4,20 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth/auth.service';
-import { itemReducer } from './items/store/reducers/reducer';
+import { environment } from '../environments/environment';
+import { ItemsEffects } from './items/store/effects/effects';
+import { reducers } from './items/store/reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,9 +29,11 @@ import { itemReducer } from './items/store/reducers/reducer';
     AppRoutingModule,
     BrowserModule,
     IonicModule.forRoot(),
-    StoreModule.forRoot({ item: itemReducer }),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([ItemsEffects]),
     StoreDevtoolsModule.instrument({
-      maxAge: 5,
+      maxAge: 25,
+      logOnly: environment.production,
     }),
   ],
   providers: [
@@ -43,5 +47,4 @@ import { itemReducer } from './items/store/reducers/reducer';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
