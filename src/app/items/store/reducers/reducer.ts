@@ -19,12 +19,14 @@ export function reducer(
         ...state,
       };
     }
+
     case fromItems.LOAD_ITEMS_SUCCESS: {
       return {
         ...state,
         entities: [...state.entities, action.payload],
       };
     }
+
     case fromItems.LOAD_ITEMS_FAIL: {
       return {
         ...state,

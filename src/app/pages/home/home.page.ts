@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -9,19 +9,21 @@ import { Observable, Subscription } from 'rxjs';
 
 import { AuthService } from '../../auth/auth.service';
 import { LoadItems } from '../../items/store/actions';
+import { ItemsState } from '../../items/store/reducers/reducer';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   authSubscription: Subscription;
   endpoint =
     'https://us-central1-ng-fitness-tracker-c96cc.cloudfunctions.net/httpEmail';
   items: Observable<any[]>;
   isAuth = false;
   myForm: FormGroup;
+  subscriptions: Array<Subscription> = [];
 
   constructor(
     private authService: AuthService,
@@ -29,14 +31,16 @@ export class HomePage implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private toastController: ToastController,
-    private store: Store<any>
+    private store: Store<ItemsState>
   ) {
     this.items = this.db.collection('prices').valueChanges();
 
     this.initMyForm();
 
-    this.store.select('ItemsState').subscribe(res => console.log(res));
     this.store.dispatch(new LoadItems());
+    this.subscriptions.push(
+      this.store.select('items').subscribe(res => console.log(res))
+    );
   }
 
   async presentToast() {
@@ -56,6 +60,10 @@ export class HomePage implements OnInit {
       });
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   sendEmail() {
     this.http
       .post(this.endpoint, this.myForm.value)
@@ -67,7 +75,7 @@ export class HomePage implements OnInit {
         console.log(err);
       });
 
-    this.presentToast();
+    const promise = this.presentToast();
     this.initMyForm();
   }
 
