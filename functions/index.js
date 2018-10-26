@@ -1,26 +1,26 @@
-var functions = require("firebase-functions");
+var functions = require('firebase-functions');
 
-const admin = require("firebase-admin");
+const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
-const cors = require("cors")({ origin: true });
+const cors = require('cors')({ origin: true });
 
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   auth: {
-    user: "marharepa142@gmail.com",
-    pass: "****"
-  }
+    user: 'marharepa142@gmail.com',
+    pass: '****',
+  },
 });
 
 exports.httpEmail = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     const mailOptions = {
-      from: "marharepa142@gmail.com", // sender address
+      from: 'marharepa142@gmail.com', // sender address
       to: req.body.toEmail, // list of receivers
       subject: req.body.subject, // Subject line
-      html: req.body.body // plain text body
+      html: req.body.body, // plain text body
     };
 
     return transporter.sendMail(mailOptions, function(err, info) {
@@ -29,7 +29,7 @@ exports.httpEmail = functions.https.onRequest((req, res) => {
         return res.status(400).send(err);
       } else {
         console.log(info);
-        return res.status(200).send(info + " email sent!");
+        return res.status(200).send(info + ' email sent!');
       }
     });
   });

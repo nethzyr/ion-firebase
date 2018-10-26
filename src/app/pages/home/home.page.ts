@@ -35,8 +35,9 @@ export class HomePage implements OnInit, OnDestroy {
   ) {
     this.initMyForm();
 
-    this.store.dispatch(new LoadItems());
     this.items = this.store.select('items');
+
+    this.store.dispatch(new LoadItems());
   }
 
   async presentToast() {
