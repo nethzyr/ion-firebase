@@ -33,14 +33,10 @@ export class HomePage implements OnInit, OnDestroy {
     private toastController: ToastController,
     private store: Store<ItemsState>
   ) {
-    this.items = this.db.collection('prices').valueChanges();
-
     this.initMyForm();
 
     this.store.dispatch(new LoadItems());
-    this.subscriptions.push(
-      this.store.select('items').subscribe(res => console.log(res))
-    );
+    this.items = this.store.select('items');
   }
 
   async presentToast() {

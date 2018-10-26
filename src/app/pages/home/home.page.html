@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <ion-grid no-padding>
-    <ion-row class="list-row" *ngFor="let item of items | async" justify-content-between align-items-center>
+    <ion-row class="list-row" *ngFor="let item of (items | async).entities" justify-content-between align-items-center>
       <ion-col size="2" sizeMd="1">
         <ion-avatar>
           <img src="assets\img\termkep_30281.jpg"/>
@@ -22,6 +22,7 @@
         <ion-label padding>
           <h2>{{ item.name }}</h2>
           <h3>{{ item.price }} Ft</h3>
+          <h3>{{ item.id }} Ft</h3>
         </ion-label>
       </ion-col>
 

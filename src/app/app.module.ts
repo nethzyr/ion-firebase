@@ -16,8 +16,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
-import { ItemsEffects } from './items/store/effects/effects';
-import { reducers } from './items/store/reducers';
+import { ItemModule } from './items/item.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,8 +28,9 @@ import { reducers } from './items/store/reducers';
     AppRoutingModule,
     BrowserModule,
     IonicModule.forRoot(),
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ItemsEffects]),
+    ItemModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
