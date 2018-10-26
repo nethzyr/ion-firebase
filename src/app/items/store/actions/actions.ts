@@ -1,21 +1,48 @@
 import { Action } from '@ngrx/store';
 
-export const LOAD_ITEMS = '[Items] Load Items';
-export const LOAD_ITEMS_FAIL = '[Items] Load Items Fail';
-export const LOAD_ITEMS_SUCCESS = '[Items] Load Items Success';
+import { Item } from '../../models/item.model';
 
-export class LoadItems implements Action {
-  readonly type = LOAD_ITEMS;
+export const QUERY = '[Item] query Items';
+
+export const ADDED = '[Item] added';
+export const MODIFIED = '[Item] modified';
+export const REMOVED = '[Item] removed';
+
+export const UPDATE = '[Item] update';
+export const UPDATE_SUCCESS = '[Item] update success';
+
+export class Query implements Action {
+  readonly type = QUERY;
 }
 
-export class LoadItemsFail implements Action {
-  readonly type = LOAD_ITEMS_FAIL;
-  constructor(public payload: any) {}
+export class Added implements Action {
+  readonly type = ADDED;
+  constructor(public payload: Item) {}
 }
 
-export class LoadItemsSuccess implements Action {
-  readonly type = LOAD_ITEMS_SUCCESS;
-  constructor(public payload: any) {}
+export class Modified implements Action {
+  readonly type = MODIFIED;
+  constructor(public payload: Item) {}
 }
 
-export type ItemAction = LoadItems | LoadItemsFail | LoadItemsSuccess;
+export class Removed implements Action {
+  readonly type = REMOVED;
+  constructor(public payload: Item) {}
+}
+
+export class Update implements Action {
+  readonly type = UPDATE;
+  constructor(public payload: Item) {}
+}
+
+export class UpdateSuccess implements Action {
+  readonly type = UPDATE_SUCCESS;
+}
+
+export type ItemActions =
+  | Query
+  | Added
+  | Modified
+  | Removed
+  | Update
+  | UpdateSuccess;

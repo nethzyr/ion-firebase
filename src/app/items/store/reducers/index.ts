@@ -1,11 +1,13 @@
+import { EntityState } from '@ngrx/entity';
 import { ActionReducerMap } from '@ngrx/store';
+import { Item } from '../../models/item.model';
 
-import * as fromItems from './reducer';
+import * as fromReducer from './reducer';
 
 export interface AppState {
-  items: fromItems.ItemsState;
+  items: EntityState<Item>;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  items: fromItems.reducer,
+  items: fromReducer.reducer,
 };

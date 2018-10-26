@@ -8,8 +8,8 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 
 import { AuthService } from '../../auth/auth.service';
-import { LoadItems } from '../../items/store/actions';
-import { ItemsState } from '../../items/store/reducers/reducer';
+import { Query } from '../../items/store/actions';
+import { selectAll } from '../../items/store/reducers/reducer';
 
 @Component({
   selector: 'app-home',
@@ -37,9 +37,9 @@ export class HomePage implements OnInit, OnDestroy {
 
     this.initMyForm();
 
-    this.store.dispatch(new LoadItems());
+    this.store.dispatch(new Query());
     this.subscriptions.push(
-      this.store.select('items').subscribe(res => console.log(res))
+      this.store.select(selectAll).subscribe(res => console.log(res))
     );
   }
 
