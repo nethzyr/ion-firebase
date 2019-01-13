@@ -72,7 +72,7 @@ export class HomePage implements OnInit, OnDestroy {
         console.log(err);
       });
 
-    const promise = this.presentToast();
+    this.presentToast();
     this.initMyForm();
   }
 

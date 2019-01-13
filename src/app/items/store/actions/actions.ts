@@ -10,7 +10,7 @@ export class LoadItems implements Action {
 
 export class LoadItemsFail implements Action {
   readonly type = LOAD_ITEMS_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: string) {}
 }
 
 export class LoadItemsSuccess implements Action {

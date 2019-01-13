@@ -4,17 +4,12 @@
     "outDir": "../out-tsc/spec",
     "baseUrl": "./",
     "module": "commonjs",
-    "types": [
-      "jasmine",
-      "node"
-    ]
+    "types": ["jest"]
   },
   "files": [
-    "test.ts"
+    "test.ts",
+    "..\node_modules@typesjestindex.d.ts",
+    "..\node_modules@typesjestindex.d.ts"
   ],
-  "include": [
-    "polyfills.ts",
-    "**/*.spec.ts",
-    "**/*.d.ts"
-  ]
+  "include": ["polyfills.ts", "**/*.spec.ts", "**/*.d.ts"]
 }

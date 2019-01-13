@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`action LoadItems 1`] = `
+LoadItems {
+  "type": "[Items] Load Items",
+}
+`;
+
+exports[`action LoadItemsFail 1`] = `
+LoadItemsFail {
+  "payload": "randomId",
+  "type": "[Items] Load Items Fail",
+}
+`;
+
+exports[`action LoadItemsSuccess 1`] = `
+LoadItemsSuccess {
+  "payload": "randomId",
+  "type": "[Items] Load Items Success",
+}
+`;

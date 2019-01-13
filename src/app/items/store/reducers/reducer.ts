@@ -1,3 +1,4 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Item } from '../../models/item.model';
 import * as fromItems from '../actions/index';
 
@@ -23,7 +24,12 @@ export function reducer(
     case fromItems.LOAD_ITEMS_SUCCESS: {
       return {
         ...state,
-        entities: [...state.entities, action.payload],
+        entities: [
+          ...state.entities,
+          {
+            ...action.payload,
+          },
+        ],
       };
     }
 
@@ -36,3 +42,9 @@ export function reducer(
       return state;
   }
 }
+
+export const getState = createFeatureSelector('items');
+export const getFirstEntity = createSelector(
+  getState,
+  (state: ItemsState) => state.entities[0]
+);
