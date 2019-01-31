@@ -1,4 +1,4 @@
-import { LoadItems, LoadItemsFail, LoadItemsSuccess } from './actions';
+import { LoadItems, LoadItemsFail, LoadItemsSuccess } from '@store/actions';
 
 describe('action', () => {
   test('LoadItems', () => {
